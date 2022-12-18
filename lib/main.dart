@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_full_modern_auth/constant/app_colors.dart';
 import 'package:flutter_full_modern_auth/ui/auth/login_page.dart';
 
 void main() {
@@ -11,10 +12,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Full Flutter Modern Auth',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: AppColors.scaffoldBackgroundLight,
+        primarySwatch: Colors.amber,
       ),
-      home: const LoginPage(),
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: AppColors.scaffoldBackgroundDark,
+        primarySwatch: Colors.amber,
+      ),
+      themeMode: ThemeMode.light,
+      home: LoginPage(),
     );
   }
 }

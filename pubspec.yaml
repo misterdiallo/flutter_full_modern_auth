@@ -21,8 +21,10 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   uses-material-design: true
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/img/pictures/
+    - assets/img/icons/
+    - assets/json/
   #   - images/a_dot_ham.jpeg
   # fonts:
   #   - family: Schyler
