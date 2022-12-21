@@ -8,6 +8,7 @@ class ButtonWidget extends StatelessWidget {
   final double? horizontalMargin;
   final double? verticalMargin;
   final Function()? onTap;
+  final bool clicked;
   const ButtonWidget({
     super.key,
     required this.text,
@@ -16,28 +17,32 @@ class ButtonWidget extends StatelessWidget {
     this.padding = 0.0,
     this.horizontalMargin = 0.0,
     this.verticalMargin = 0.0,
+    this.clicked = false,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(padding!),
-        margin: EdgeInsets.symmetric(
-            horizontal: horizontalMargin!, vertical: verticalMargin!),
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: Theme.of(context).textTheme.button!.copyWith(
-                  color: textColor,
-                  fontSize: 16.0,
-                ),
+    return MouseRegion(
+      cursor: clicked ? SystemMouseCursors.wait : SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: clicked ? null : onTap,
+        child: Container(
+          padding: EdgeInsets.all(padding!),
+          margin: EdgeInsets.symmetric(
+              horizontal: horizontalMargin!, vertical: verticalMargin!),
+          decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Center(
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.button!.copyWith(
+                    color: textColor,
+                    fontSize: 16.0,
+                  ),
+            ),
           ),
         ),
       ),

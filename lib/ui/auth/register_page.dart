@@ -1,28 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_full_modern_auth/constant/app_colors.dart';
-import 'package:flutter_full_modern_auth/ui/auth/register_page.dart';
+import 'package:flutter_full_modern_auth/ui/auth/login_page.dart';
 import 'package:flutter_full_modern_auth/ui/widget/button_widget.dart';
 import 'package:flutter_full_modern_auth/ui/widget/social_logo_button.dart';
 import 'package:flutter_full_modern_auth/ui/widget/text_field_widget.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   // Text Editing controllers
-  final usernameController = TextEditingController();
-  String? errorMessage;
+  final firstnameController = TextEditingController();
+
+  final lastnameController = TextEditingController();
+
+  final emailController = TextEditingController();
+
+  final phoneController = TextEditingController();
+
   final passwordController = TextEditingController();
 
-  bool clicked = false;
+  String? errorMessage;
 
   // sign user in functon
   void signUserIn() {
-    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
+    if (firstnameController.text.isEmpty ||
+        lastnameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        phoneController.text.isEmpty ||
+        passwordController.text.isEmpty) {
       setState(() {
         errorMessage = "Some fields are empty.";
       });
@@ -45,9 +55,9 @@ class _LoginPageState extends State<LoginPage> {
               child: ConstrainedBox(
                 constraints: BoxConstraints(
                     maxWidth: 450,
-                    maxHeight: screenSize.height > 700
+                    maxHeight: screenSize.height > 950
                         ? screenSize.height * 0.9
-                        : 700),
+                        : 950),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -62,11 +72,11 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: screenSize.height * 0.05),
                     //? welcome message
                     Text(
-                      "Welcome to the awersome full flutter Authentication App",
+                      "Sign up",
                       textAlign: TextAlign.center,
                       style: Theme.of(context)
                           .textTheme
-                          .titleSmall!
+                          .headline4!
                           .copyWith(color: AppColors.grey700),
                     ),
                     const SizedBox(height: 25),
@@ -85,11 +95,36 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                         ),
                       ),
-                    //? username
+                    //? firstname
                     TextFieldWidget(
-                      controller: usernameController,
-                      hintText: "Username",
+                      controller: firstnameController,
+                      hintText: "Firstname",
                       obscureText: false,
+                      action: TextInputAction.next,
+                    ),
+                    const SizedBox(height: 10),
+                    //? Lastname
+                    TextFieldWidget(
+                      controller: lastnameController,
+                      hintText: "Lastname",
+                      obscureText: false,
+                      action: TextInputAction.next,
+                    ),
+                    const SizedBox(height: 10),
+                    //? Email
+                    TextFieldWidget(
+                      controller: emailController,
+                      hintText: "Email",
+                      obscureText: false,
+                      action: TextInputAction.next,
+                    ),
+                    const SizedBox(height: 10),
+                    //? Phone
+                    TextFieldWidget(
+                      controller: phoneController,
+                      hintText: "Phone",
+                      obscureText: false,
+                      action: TextInputAction.next,
                     ),
                     const SizedBox(height: 10),
                     //? password
@@ -99,36 +134,20 @@ class _LoginPageState extends State<LoginPage> {
                       obscureText: true,
                       action: TextInputAction.done,
                     ),
-                    const SizedBox(height: 10),
-                    //? Forgot password ?
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Forgot password ?",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .copyWith(color: AppColors.grey700),
-                          ),
-                        ],
-                      ),
-                    ),
+
                     SizedBox(
                       height: screenSize.height * 0.07,
                     ),
                     //? login button
                     ButtonWidget(
-                      text: "Sign In",
-                      bgColor: clicked ? AppColors.grey700 : AppColors.black,
+                      text: "Sign Up",
+                      bgColor: AppColors.black,
                       textColor: AppColors.white,
                       padding: 18.0,
                       horizontalMargin: 25,
                       onTap: signUserIn,
-                      clicked: clicked,
                     ),
+
                     SizedBox(height: screenSize.height * 0.03),
                     //? message for continue with others
                     Padding(
@@ -144,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 10.0),
                             child: Text(
-                              "Or sign in with",
+                              "or by using",
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!
@@ -159,26 +178,25 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-                    //? social app logo button
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         //? Google button
                         const SocialLogoButon(
                           url: 'assets/img/pictures/google-logo.png',
-                          height: 40.0,
+                          height: 30.0,
                         ),
                         SizedBox(width: screenSize.width * 0.02),
                         //? Apple Button
                         const SocialLogoButon(
                           url: 'assets/img/pictures/apple-logo.png',
-                          height: 40.0,
+                          height: 30.0,
                         ),
                         SizedBox(width: screenSize.width * 0.02),
                         //? Wechat Button
                         const SocialLogoButon(
                           url: 'assets/img/pictures/wechat-logo.png',
-                          height: 40.0,
+                          height: 30.0,
                         ),
                       ],
                     ),
@@ -188,8 +206,9 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () =>
                           Navigator.of(context).pushAndRemoveUntil<void>(
                         MaterialPageRoute<void>(
-                            builder: (BuildContext context) => RegisterPage()),
-                        ModalRoute.withName('/signup'),
+                            builder: (BuildContext context) =>
+                                const LoginPage()),
+                        ModalRoute.withName('/signin'),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -197,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Not a member ? ",
+                              "Already a member ? ",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!
@@ -205,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             const SizedBox(width: 5),
                             Text(
-                              "Sign Up",
+                              "Sign In",
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyText1!

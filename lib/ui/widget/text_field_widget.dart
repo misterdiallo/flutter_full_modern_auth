@@ -7,19 +7,21 @@ class TextFieldWidget extends StatelessWidget {
   final String hintText;
   final bool obscureText;
   final TextInputAction? action;
+  final String? errorMessage;
   const TextFieldWidget({
     Key? key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
     this.action = TextInputAction.none,
+    this.errorMessage,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         textInputAction: TextInputAction.next,
         autocorrect: false,
@@ -39,6 +41,7 @@ class TextFieldWidget extends StatelessWidget {
           filled: true,
           hintText: hintText,
           hintStyle: TextStyle(color: AppColors.grey[500]),
+          errorText: errorMessage,
         ),
       ),
     );
